@@ -80,6 +80,13 @@ function quit(){
   process.exit();
 }
 
+
+
+/**
+ * Listing all commands
+ *
+ * @returns {void}
+ */
 let allCommands = [`"hello" for saying hello!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
 
 function help(){
