@@ -39,6 +39,8 @@ function onDataReceived(text) {
   }
   else if(text === 'hello\n'){
     hello();
+  } else if (text === "help\n"){
+    help();
   }
   else{
     unknownCommand(text);
@@ -76,6 +78,15 @@ function hello(){
 function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
+}
+
+let allCommands = [`"hello" for saying hello!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
+
+function help(){
+  console.log("The commands are:\n");
+  for(let i=0; i<allCommands.length; i++){
+    console.log(allCommands[i]);
+  }
 }
 
 // The following line starts the application
