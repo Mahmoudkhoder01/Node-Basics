@@ -116,7 +116,7 @@ function showList(text) {
     console.log("There is no tasks to do");
   }
   for (let i = 0; i < list.length; i++) {
-    console.log(`${i + 1}- ${list[i]}`);
+    console.log(`${i + 1}- [] ${list[i]}`);
   }
 }
 function add(text) {
