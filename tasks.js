@@ -104,7 +104,14 @@ function quit() {
  *
  * @returns {void}
  */
-let allCommands = [`"hello" for saying hello!`, `"hello arg" for say hello arg!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
+let allCommands = [`"hello" for saying hello!`,
+  `"hello arg" for say hello arg!`,
+  `"quit" or "exit" for close the command line`,
+  `"help" for listing all commands`,
+  `"list" for showing the list`,
+  `"add arg" to add an argument to the list`,
+  `"remove" to remove the last element`,
+  `"remove number" to remove the number of element of the list`,]
 
 function help() {
   console.log("The commands are:\n");
