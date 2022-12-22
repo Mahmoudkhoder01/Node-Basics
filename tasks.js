@@ -42,8 +42,10 @@ function onDataReceived(text) {
     hello(text);
   } else if (text === "help\n") {
     help();
-  } else if(text === "list\n"){
+  } else if (text === "list\n") {
     showList(text);
+  } else if (text.split(" ")[0] === "add") {
+    add(text);
   }
   else {
     unknownCommand(text);
@@ -107,11 +109,22 @@ function help() {
   }
 }
 
-let list = ["by batata", "do the exercice"];
+let list = [];
 
 function showList(text) {
+  if(list.length === 0){
+    console.log("There is no tasks to do");
+  }
   for (let i = 0; i < list.length; i++) {
     console.log(`${i + 1}- ${list[i]}`);
+  }
+}
+function add(text) {
+  text = text.replace('\n', '').trim();
+  const words = text.split(' ');
+  if (words[0] === 'add') {
+    const argument = words.slice(1).join(' ');
+    list.push(argument);
   }
 }
 
