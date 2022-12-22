@@ -42,6 +42,8 @@ function onDataReceived(text) {
     hello(text);
   } else if (text === "help\n") {
     help();
+  } else if(text === "list\n"){
+    showList(text);
   }
   else {
     unknownCommand(text);
@@ -67,10 +69,10 @@ function unknownCommand(c) {
  * @returns {void}
  */
 function hello(text) {
-  if(text === "hello\n"){
+  if (text === "hello\n") {
     console.log("hello!");
     return
-  } 
+  }
   text = text.replace('\n', '').trim();
   const words = text.split(' ');
   if (words[0] === 'hello') {
@@ -91,13 +93,12 @@ function quit() {
 }
 
 
-
 /**
  * Listing all commands
  *
  * @returns {void}
  */
-let allCommands = [`"hello" for saying hello!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
+let allCommands = [`"hello" for saying hello!`, `"hello arg" for say hello arg!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
 
 function help() {
   console.log("The commands are:\n");
@@ -105,6 +106,16 @@ function help() {
     console.log(allCommands[i]);
   }
 }
+
+let list = ["by batata", "do the exercice"];
+
+function showList(text) {
+  for (let i = 0; i < list.length; i++) {
+    console.log(`${i + 1}- ${list[i]}`);
+  }
+}
+
+
 
 // The following line starts the application
 startApp("Mahmoud Khodor")
