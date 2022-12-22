@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-function startApp(name){
+function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
@@ -34,15 +34,20 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  text = text.replace('\n', '').trim();
+  const words = text.split(' ');
   if (text === 'quit\n' || text === "exit\n") {
     quit();
   }
-  else if(text === 'hello\n'){
+  else if (text === 'hello\n') {
     hello();
-  } else if (text === "help\n"){
+  } else if (text === "help\n") {
     help();
+  } else if (words[0] === 'hello') {
+    const argument = words.slice(1).join(' ');
+    console.log(`hello ${argument}!`);
   }
-  else{
+  else {
     unknownCommand(text);
   }
 }
@@ -55,8 +60,8 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
-function unknownCommand(c){
-  console.log('unknown command: "'+c.trim()+'"')
+function unknownCommand(c) {
+  console.log('unknown command: "' + c.trim() + '"')
 }
 
 
@@ -65,7 +70,7 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
+function hello() {
   console.log('hello!')
 }
 
@@ -75,7 +80,7 @@ function hello(){
  *
  * @returns {void}
  */
-function quit(){
+function quit() {
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -89,9 +94,9 @@ function quit(){
  */
 let allCommands = [`"hello" for saying hello!`, `"quit" or "exit" for close the command line`, `"help" for listing all commands`]
 
-function help(){
+function help() {
   console.log("The commands are:\n");
-  for(let i=0; i<allCommands.length; i++){
+  for (let i = 0; i < allCommands.length; i++) {
     console.log(allCommands[i]);
   }
 }
