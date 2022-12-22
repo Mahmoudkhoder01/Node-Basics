@@ -46,6 +46,12 @@ function onDataReceived(text) {
     showList(text);
   } else if (text.split(" ")[0] === "add") {
     add(text);
+  } else if (text === "remove\n"){
+    removeLastTask();
+  } else if(text === "remove 1\n"){
+    removeFirstTask()
+  } else if(text === "remove 2\n"){
+    removeSecondTask();
   }
   else {
     unknownCommand(text);
@@ -111,14 +117,26 @@ function help() {
 
 let list = [];
 
+
+/**
+ * Show the list
+ *
+ * @returns {void}
+ */
 function showList(text) {
   if(list.length === 0){
     console.log("There is no tasks to do");
   }
   for (let i = 0; i < list.length; i++) {
-    console.log(`${i + 1}- [] ${list[i]}`);
+    console.log(`${i + 1}- [ ] ${list[i]}`);
   }
 }
+
+/**
+ * Add to a list
+ *
+ * @returns {void}
+ */
 function add(text) {
   text = text.replace('\n', '').trim();
   const words = text.split(' ');
@@ -127,6 +145,35 @@ function add(text) {
     list.push(argument);
   }
 }
+
+/**
+ * Remove last task
+ *
+ * @returns {void}
+ */
+function removeLastTask(){
+  list.pop();
+}
+
+/**
+ * Remove first task
+ *
+ * @returns {void}
+ */
+function removeFirstTask(){
+  list.shift();
+}
+
+/**
+ * Remove second task
+ *
+ * @returns {void}
+ */
+function removeSecondTask(){
+  list.splice(1,1);
+}
+
+
 
 
 
