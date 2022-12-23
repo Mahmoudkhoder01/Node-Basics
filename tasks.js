@@ -116,7 +116,9 @@ let allCommands = [`"hello" for saying hello!`,
   `"add arg" to add an argument to the list`,
   `"remove" to remove the last element`,
   `"remove number" to remove the number of element of the list`,
-  `"edit number" to edit the number of element of the list`]
+  `"edit number" to edit the number of element of the list`,
+  `"check number" to check the element in the list`,
+  `"uncheck number" to uncheck the check element in the list`]
 
 function help() {
   console.log("The commands are:\n");
