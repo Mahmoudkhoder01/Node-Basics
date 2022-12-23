@@ -100,6 +100,13 @@ function hello(text) {
  * @returns {void}
  */
 function quit() {
+  let data = JSON.stringify(listObject);
+  try {
+    fs.writeFileSync(savefile, data);
+    console.log(`Your list are saved`);
+  } catch (error) {
+    console.error(error);
+  }
   console.log('Quitting now, goodbye!')
   process.exit();
 }
@@ -253,6 +260,12 @@ function uncheckList(text) {
   }
 }
 
+let savefile;
+if (process.argv[2] == null) {
+  savefile = "database.json";
+} else {
+  savefile = process.argv[2];
+}
 
 try {
   let data = fs.readFileSync(savefile);
