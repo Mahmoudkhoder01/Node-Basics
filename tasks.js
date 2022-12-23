@@ -50,6 +50,8 @@ function onDataReceived(text) {
     removeTask(text);
   } else if (text.split(" ")[0] === "edit" || text === "edit\n") {
     editTask(text);
+  } else if (text.split(" ")[0] === "done" || text === "done\n") {
+    doneList(text);
   }
   else {
     unknownCommand(text);
@@ -111,7 +113,8 @@ let allCommands = [`"hello" for saying hello!`,
   `"list" for showing the list`,
   `"add arg" to add an argument to the list`,
   `"remove" to remove the last element`,
-  `"remove number" to remove the number of element of the list`,]
+  `"remove number" to remove the number of element of the list`,
+  `"edit number" to edit the number of element of the list`]
 
 function help() {
   console.log("The commands are:\n");
@@ -122,18 +125,22 @@ function help() {
 
 let list = [];
 
+let listObject = {
+  list_description: "",
+  done: false
+}
 
 /**
  * Show the list
  *
  * @returns {void}
  */
-function showList(text) {
+function showList() {
   if (list.length === 0) {
     console.log("There is no tasks to do");
   }
   for (let i = 0; i < list.length; i++) {
-    console.log(`${i + 1}- [ ] ${list[i]}`);
+    console.log(`${i + 1}- ${list[i]}`);
   }
 }
 
@@ -147,7 +154,7 @@ function add(text) {
   const words = text.split(' ');
   if (words[0] === 'add') {
     const argument = words.slice(1).join(' ');
-    list.push(argument);
+    list.push(`[ ] ${argument}`);
   }
 }
 
@@ -169,12 +176,12 @@ function removeTask(text) {
     if (a > list.length) {
       console.log("You enter a number does not exist");
     } else {
-      list.splice(`${a - 1}`, 1);
+      list.splice(`${a[0] - 1}`, 1);
     }
   }
 }
 /**
- * Remove tasks
+ * Remove tasksj
  *
  * @returns {void}
  */
@@ -187,16 +194,38 @@ function editTask(text) {
   const words = text.split(' ');
   if (words[0] === 'edit') {
     const a = words.slice(1).join(' ');
-    if (a > list.length) {
-      console.log("You enter a number does not exist");
-    } else {
+    if (a[0] > list.length) {
+      console.log("You enter a number does not exist")
+    } else if (typeof parseInt(a[0]) === "number" && a[1] === " ") {
       list.splice(`${a[0] - 1}`, 1, a.slice(2));
+    } else if (typeof a[0] === "string") {
+      list.splice(-1, 1, a)
     }
   }
 }
 
+/**
+ * Cehck a list
+ *
+ * @returns {void}
+ */
+function doneList(text) {
+  if (text === "done\n") {
+    console.log("Which one you done it!")
+  } else if (words[0] === "done") {
+  text = text.replace('\n', '').trim()
+  const words = text.split(" ")
+    const a = words.slice(1).join(' ')
+    if (a[0] > list.length) {
+      console.log("You enter a number does not exist")
+    } else {
+      list.splice(`${a[0] - 1}`, 1, `[✓]${list[a - 1].slice(3)}`)
+      // list.replace(list[4], "✓")
+    }
+  }
+}
 
-
+// ✓
 
 
 // The following line starts the application
