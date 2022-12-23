@@ -224,6 +224,8 @@ function checkList(text) {
     const a = words.slice(1).join(' ')
     if (a[0] > list.length) {
       console.log("You enter a number not exist")
+    } else if (list[a[0]-1][1] === "✓") {
+      console.log("Already checked!");
     } else {
       list.splice(`${a[0] - 1}`, 1, `[✓]${list[a - 1].slice(3)}`)
     }
@@ -246,7 +248,9 @@ function uncheckList(text) {
     const a = words.slice(1).join(' ')
     if (a[0] > list.length) {
       console.log("You enter a number not exist")
-    } else {
+    } else if (list[a[0]-1][1] === " ") {
+      console.log("Already unchecked!");
+    }  else {
       list.splice(`${a[0] - 1}`, 1, `[ ]${list[a - 1].slice(3)}`)
     }
   }
