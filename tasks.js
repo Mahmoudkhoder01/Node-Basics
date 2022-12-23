@@ -205,7 +205,7 @@ function editTask(text) {
     if (a[0] > list.length) {
       console.log("You enter a number does not exist")
     } else if (typeof parseInt(a[0]) === "number" && a[1] === " ") {
-      list.splice(`${a[0] - 1}`, 1, a.slice(2));
+      list.splice(`${a[0] - 1}`, 1,`[ ] ${a.slice(2)}`);
     } else if (typeof a[0] === "string") {
       list.splice(-1, 1, a)
     }
