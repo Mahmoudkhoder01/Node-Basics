@@ -1,4 +1,6 @@
 
+const fs = require('fs');
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -129,11 +131,6 @@ function help() {
 
 let list = [];
 
-let listObject = {
-  list_description: "",
-  done: false
-}
-
 /**
  * Show the list
  *
@@ -224,7 +221,7 @@ function checkList(text) {
     const a = words.slice(1).join(' ')
     if (a[0] > list.length) {
       console.log("You enter a number not exist")
-    } else if (list[a[0]-1][1] === "✓") {
+    } else if (list[a[0] - 1][1] === "✓") {
       console.log("Already checked!");
     } else {
       list.splice(`${a[0] - 1}`, 1, `[✓]${list[a - 1].slice(3)}`)
@@ -248,12 +245,27 @@ function uncheckList(text) {
     const a = words.slice(1).join(' ')
     if (a[0] > list.length) {
       console.log("You enter a number not exist")
-    } else if (list[a[0]-1][1] === " ") {
+    } else if (list[a[0] - 1][1] === " ") {
       console.log("Already unchecked!");
-    }  else {
+    } else {
       list.splice(`${a[0] - 1}`, 1, `[ ]${list[a - 1].slice(3)}`)
     }
   }
+}
+
+
+try {
+  let data = fs.readFileSync(savefile);
+  var listObject = JSON.parse(data);
+}
+catch (e) {
+  console.log(`Hello from JSON!`)
+}
+if (listObject !== undefined) {
+  list = listObject.list;
+} else {
+  listObject = { "list": [] }
+  list = listObject.list;
 }
 
 // The following line starts the application
