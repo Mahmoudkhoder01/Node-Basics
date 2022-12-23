@@ -50,8 +50,10 @@ function onDataReceived(text) {
     removeTask(text);
   } else if (text.split(" ")[0] === "edit" || text === "edit\n") {
     editTask(text);
-  } else if (text.split(" ")[0] === "done" || text === "done\n") {
-    doneList(text);
+  } else if (text.split(" ")[0] === "check" || text === "check\n") {
+    checkList(text);
+  } else if (text.split(" ")[0] === "uncheck" || text === "uncheck\n") {
+    uncheckList(text);
   }
   else {
     unknownCommand(text);
@@ -209,24 +211,44 @@ function editTask(text) {
  *
  * @returns {void}
  */
-function doneList(text) {
-  if (text === "done\n") {
-    console.log("Which one you done it!")
-  } else if (words[0] === "done") {
+function checkList(text) {
+  if (text === "check\n") {
+    console.log("Which one you want to check it!")
+    return
+  }
   text = text.replace('\n', '').trim()
   const words = text.split(" ")
+  if (words[0] === "check") {
     const a = words.slice(1).join(' ')
     if (a[0] > list.length) {
-      console.log("You enter a number does not exist")
+      console.log("You enter a number not exist")
     } else {
       list.splice(`${a[0] - 1}`, 1, `[✓]${list[a - 1].slice(3)}`)
-      // list.replace(list[4], "✓")
     }
   }
 }
 
-// ✓
-
+/**
+ * uncehck a list
+ *
+ * @returns {void}
+ */
+function uncheckList(text) {
+  if (text === "uncheck\n") {
+    console.log("Which one you want to uncheck it!")
+    return
+  }
+  text = text.replace('\n', '').trim();
+  const words = text.split(' ');
+  if (words[0] === "uncheck") {
+    const a = words.slice(1).join(' ')
+    if (a[0] > list.length) {
+      console.log("You enter a number not exist")
+    } else {
+      list.splice(`${a[0] - 1}`, 1, `[ ]${list[a - 1].slice(3)}`)
+    }
+  }
+}
 
 // The following line starts the application
 startApp("Mahmoud Khodor")
